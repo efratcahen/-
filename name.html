@@ -36,27 +36,30 @@
 </head>
 <body>
     <div class="container">
-        <input type="text" id="excludeName" placeholder="Enter name to exclude">
+        <input type="text" id="userName" placeholder="Enter your name">
         <button onclick="generateRandomName()">Generate Random Name</button>
         <div id="result"></div>
     </div>
 
     <script>
-    const names = ['Alice', 'Bob', 'Charlie', 'David', 'Emma', 'Frank', 'Grace', 'Henry'];
+        let names = ['Alice', 'Bob', 'Charlie', 'David', 'Emma', 'Frank', 'Grace', 'Henry'];
 
-    function generateRandomName() {
-        const excludeName = document.getElementById('excludeName').value.trim().toLowerCase();
-        const availableNames = names.filter(name => name.toLowerCase() !== excludeName);
-        
-        if (availableNames.length === 0) {
-            document.getElementById('result').textContent = "No names available";
-            return;
+        function generateRandomName() {
+            const userName = document.getElementById('userName').value.trim().toLowerCase();
+            const availableNames = names.filter(name => name.toLowerCase() !== userName);
+
+            if (availableNames.length === 0) {
+                document.getElementById('result').textContent = "No names available";
+                return;
+            }
+
+            const randomIndex = Math.floor(Math.random() * availableNames.length);
+            const randomName = availableNames[randomIndex];
+            document.getElementById('result').textContent = randomName;
+
+            // Remove the generated name from the original list
+            names = names.filter(name => name.toLowerCase() !== randomName.toLowerCase());
         }
-        
-        const randomIndex = Math.floor(Math.random() * availableNames.length);
-        const randomName = availableNames[randomIndex];
-        document.getElementById('result').textContent = randomName;
-    }
     </script>
 </body>
 </html>
